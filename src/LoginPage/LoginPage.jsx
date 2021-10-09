@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import './LoginPage.scss'
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaLock } from 'react-icons/fa';
 
 class LoginPage extends React.Component {
 
@@ -8,7 +9,8 @@ class LoginPage extends React.Component {
         super(props);
         this.state = {
             username : "",
-            password : ""
+            password : "",
+            submitted: false 
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -44,17 +46,19 @@ class LoginPage extends React.Component {
                         <form name="form" onSubmit={this.handleSubmit}>
 
                         {/* Create form username */}
-                        <div className="form-group">
+                        <div className="form-group mb-user">
                             <label htmlFor="username"> Username</label>
                             <input
                             type="text" 
                             className="form-control"
                             name="username"
-                            value={username}
                             placeholder="Enter your username" 
                             onChange={this.handleChange}
                             />
-                            <span class="focus-input100"><FaUser/></span>
+                            <span className="focus-icon"><FaUser/></span>
+                            {submitted && !username &&
+                                <div className="help-block">Username is required</div>
+                            }
                         </div>
 
                         {/* Create form password */}
@@ -64,10 +68,16 @@ class LoginPage extends React.Component {
                             type="password" 
                             className="form-control"
                             name="password"
-                            value={password}
                             placeholder="Enter your password"
                             onChange={this.handleChange}
                             />
+                            <span className="focus-icon"><FaLock/></span>
+                            {submitted && !password &&
+                                <div className="help-block">Password is required</div>
+                            }
+                        </div>
+                        <div className="forgot-right">
+                            <Link to="/register" className="fg-password">Forgot password?</Link>
                         </div>
                         <div className="wrap-btn">
                             <button className="btn btn-primary">Login</button>
