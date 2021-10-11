@@ -1,5 +1,4 @@
-
-.container {
+.containe {
     width: 100%;
     margin: 0 auto;
 
@@ -18,7 +17,7 @@
     }
 
     .wrap-form {
-        width: 450px;
+        width: 415px;
         background: rgb(255, 255, 255);
         border-radius: 10px;
         padding: 50px;
@@ -27,11 +26,11 @@
         h2{
             display: block;
             font-family: Poppins-Bold;
-            font-size: 39px;
+            font-size: 35px;
             color: rgb(51, 51, 51);
             line-height: 1.2;
             text-align: center;
-            margin-bottom: 20px;
+            margin: -10px 0 0 10px;
         }
     }
 
@@ -39,10 +38,10 @@
         width: 100%;
     }
 
-    .form-group {
+    .form-mb {
         position: relative;
         width: 100%;
-
+        margin-bottom: 5px;
         label {
             font-family: Poppins-Regular;
             font-size: 14px;
@@ -60,14 +59,14 @@
         input:focus {
             border-color:rgb(105, 104, 104);
         }
+
         .focus-icon {
             position: absolute;
             color: rgb(51, 51, 51);
             opacity: 0.6;
-            top: 38px;
+            top: 33px;
             left: 11px;
         }
-
 
         .help-block {
             font-size: 14px;
@@ -75,21 +74,6 @@
         }
         
     }
-
-    .pwd img {
-        object-fit: cover;
-        cursor: pointer;
-        opacity: 0.5;
-        position: absolute;
-        width: 17px;
-        right: 8px;
-        top: 40px;
-    }
-
-    .mb-user {
-        margin-bottom: 20px;
-    }
-
     .form-control {
         font-family: Poppins-Medium;
         font-size: 16px;
@@ -97,7 +81,7 @@
         line-height: 1.2;
         display: block;
         width: 100%;
-        height: 55px !important;
+        height: 45px;
         padding: 0px 7px 0px 40px;
     }
     
@@ -107,13 +91,13 @@
     }
 
     .wrap-btn {
-        width: 50%;
+        width: 40%;
         display: block;
         position: relative;
         z-index: 1;
         border-radius: 25px;
         overflow: hidden;
-        margin: 0px auto;
+        margin: 15px auto;
 
         .btn {
             border-width: initial;

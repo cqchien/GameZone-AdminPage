@@ -1,13 +1,11 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import LoginPage from "./LoginPage/LoginPage";
+import Home from "./Pages/Home.jsx";
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <LoginPage/>
-      </div>
+      <Home/>
     </BrowserRouter>
   );
 }

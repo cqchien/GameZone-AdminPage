@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa';
-import './LoginPage.scss'
-// import showPwdImg from '/show-password.png';
+import './LoginPage.scss';
 
 class LoginPage extends React.Component {
 
@@ -29,7 +28,9 @@ class LoginPage extends React.Component {
         e.preventDefault();
 
         this.setState({ submitted: true });
+
         const { username, password } = this.state;
+
         if (username && password) {
             this.props.login(username, password);
         }
@@ -55,6 +56,7 @@ class LoginPage extends React.Component {
                             type="text" 
                             className="form-control"
                             name="username"
+                            value={username}
                             placeholder="Enter your email" 
                             onChange={this.handleChange}
                             />
@@ -89,16 +91,18 @@ class LoginPage extends React.Component {
                                 <div className="help-block">Password is required</div>
                             }
                         </div>
-                        <div className="forgot-right">
-                            <Link to="/" className="btn-link">Forgot password?</Link>
-                        </div>
-                        <div className="wrap-btn">
-                            <button className="btn btn-primary">Login</button>
-                        </div>
-                        <div className="btn-sign-up">
-                            <span>Don't have an account?</span>
-                            <Link to="/" className="btn-link">Sign Up</Link>
-                        </div>
+                            <div className="forgot-right">
+                                <Link to="/" className="btn-link">Forgot password?</Link>
+                            </div>
+
+                            {/* Button login */}
+                            <div className="wrap-btn">
+                                <button className="btn btn-primary">Login</button>
+                            </div>
+                            <div className="btn-sign-up">
+                                <span>Don't have an account?</span>
+                                <Link to="/register" className="btn-link">Sign Up</Link>
+                            </div>
                         </form>
                     </div>
 
