@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import './LoginPage.scss'
 import { FaUser, FaLock } from 'react-icons/fa';
+import './LoginPage.scss'
+// import showPwdImg from '/show-password.png';
 
 class LoginPage extends React.Component {
 
@@ -10,8 +11,10 @@ class LoginPage extends React.Component {
         this.state = {
             username : "",
             password : "",
-            submitted: false 
+            submitted : false,
+            isShowPwd : false
         };
+
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,9 +37,9 @@ class LoginPage extends React.Component {
 
     render() {
 
-        const { loggingIn } = this.props;
+        // const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
-
+        const isShowPwd = this.state.isShowPwd;
         return(
             <div className="container">
 
@@ -47,40 +50,54 @@ class LoginPage extends React.Component {
 
                         {/* Create form username */}
                         <div className="form-group mb-user">
-                            <label htmlFor="username"> Username</label>
+                            <label htmlFor="username"> Email</label>
                             <input
                             type="text" 
                             className="form-control"
                             name="username"
-                            placeholder="Enter your username" 
+                            placeholder="Enter your email" 
                             onChange={this.handleChange}
                             />
                             <span className="focus-icon"><FaUser/></span>
                             {submitted && !username &&
-                                <div className="help-block">Username is required</div>
+                                <div className="help-block">Email is required</div>
                             }
                         </div>
 
                         {/* Create form password */}
-                        <div className="form-group">
+                        <div className="form-group pwd">
                             <label htmlFor="password"> Password</label>
                             <input
-                            type="password" 
+                            type={isShowPwd ? "text" : "password"} 
                             className="form-control"
                             name="password"
+                            value={password}
                             placeholder="Enter your password"
                             onChange={this.handleChange}
                             />
+
+                            {/* Add icon show-hide password */}
+                            <img
+                            title={isShowPwd ?  "Show password" : "Hide password"}
+                            src={isShowPwd ? '/img/show-password.png' : '/img/hide-password.png'}
+                            alt="Show-HidePwd"
+                            onClick={() => this.setState(prevState => ({isShowPwd: !prevState.isShowPwd}))}
+                            />
+
                             <span className="focus-icon"><FaLock/></span>
                             {submitted && !password &&
                                 <div className="help-block">Password is required</div>
                             }
                         </div>
                         <div className="forgot-right">
-                            <Link to="/register" className="fg-password">Forgot password?</Link>
+                            <Link to="/" className="btn-link">Forgot password?</Link>
                         </div>
                         <div className="wrap-btn">
                             <button className="btn btn-primary">Login</button>
+                        </div>
+                        <div className="btn-sign-up">
+                            <span>Don't have an account?</span>
+                            <Link to="/" className="btn-link">Sign Up</Link>
                         </div>
                         </form>
                     </div>
