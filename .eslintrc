@@ -2,6 +2,7 @@
   "root": true,
   "env": {
     "browser": true,
+    "es6": true,
     "node": true
   },
   "extends": [
@@ -22,6 +23,14 @@
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "impliedStrict": true
+    }
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", "src/"],
+        "moduleDirectory": ["node_modules", "src/"]
+      }
     }
   },
   "rules": {
@@ -59,15 +68,6 @@
       1,
       {
         "ignoreRestSiblings": false
-      }
-    ],
-    "prettier/prettier": [
-      2,
-      {
-        "printWidth": 100,
-        "singleQuote": true,
-        "trailingComma": "none",
-        "tabWidth": 2
       }
     ]
   }

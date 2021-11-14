@@ -32,7 +32,7 @@ import USERLIST from '../_mocks_/user';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
+  { id: 'product', label: 'Name', alignRight: false },
   { id: 'company', label: 'Company', alignRight: false },
   { id: 'role', label: 'Role', alignRight: false },
   { id: 'isVerified', label: 'Verified', alignRight: false },
@@ -210,6 +210,7 @@ export default function User() {
                           </TableCell>
 
                           <TableCell align="right">
+                            {/* //////////////////////////////// */}
                             <UserMoreMenu />
                           </TableCell>
                         </TableRow>

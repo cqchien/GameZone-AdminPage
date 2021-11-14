@@ -2,54 +2,20 @@ import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { Form, FormikProvider } from 'formik';
 import closeFill from '@iconify/icons-eva/close-fill';
-import roundClearAll from '@iconify/icons-ic/round-clear-all';
-import roundFilterList from '@iconify/icons-ic/round-filter-list';
+import plusFill from '@iconify/icons-eva/plus-fill';
 // material
 import {
   Box,
-  Radio,
   Stack,
   Button,
   Drawer,
-  Rating,
   Divider,
-  Checkbox,
-  FormGroup,
+  TextField,
   IconButton,
   Typography,
-  RadioGroup,
-  FormControlLabel
 } from '@mui/material';
 //
 import Scrollbar from '../../Scrollbar';
-import ColorManyPicker from '../../ColorManyPicker';
-
-// ----------------------------------------------------------------------
-
-export const SORT_BY_OPTIONS = [
-  { value: 'featured', label: 'Featured' },
-  { value: 'newest', label: 'Newest' },
-  { value: 'priceDesc', label: 'Price: High-Low' },
-  { value: 'priceAsc', label: 'Price: Low-High' }
-];
-export const FILTER_GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const FILTER_CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
-export const FILTER_RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
-export const FILTER_PRICE_OPTIONS = [
-  { value: 'below', label: 'Below $25' },
-  { value: 'between', label: 'Between $25 - $75' },
-  { value: 'above', label: 'Above $75' }
-];
-export const FILTER_COLOR_OPTIONS = [
-  '#00AB55',
-  '#000000',
-  '#FFFFFF',
-  '#FFC0CB',
-  '#FF4842',
-  '#1890FF',
-  '#94D82D',
-  '#FFC107'
-];
 
 // ----------------------------------------------------------------------
 
@@ -68,27 +34,27 @@ export default function ShopFilterSidebar({
   onCloseFilter,
   formik
 }) {
-  const { values, getFieldProps, handleChange } = formik;
 
+  const { errors, touched, isSubmitting, handleSubmit, getFieldProps } = formik;
+  
   return (
     <>
-      <Button
-        disableRipple
-        color="inherit"
-        endIcon={<Icon icon={roundFilterList} />}
-        onClick={onOpenFilter}
-      >
-        Filters&nbsp;
-      </Button>
+        <Button
+            variant="contained"
+            startIcon={<Icon icon={plusFill} />}
+            onClick={onOpenFilter}
+          >
+            New Product
+        </Button>
 
       <FormikProvider value={formik}>
-        <Form autoComplete="off" noValidate>
+        <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
           <Drawer
             anchor="right"
             open={isOpenFilter}
             onClose={onCloseFilter}
             PaperProps={{
-              sx: { width: 280, border: 'none', overflow: 'hidden' }
+              sx: { width: 600, border: 'none', overflow: 'hidden' }
             }}
           >
             <Stack
@@ -97,8 +63,8 @@ export default function ShopFilterSidebar({
               justifyContent="space-between"
               sx={{ px: 1, py: 2 }}
             >
-              <Typography variant="subtitle1" sx={{ ml: 1 }}>
-                Filters
+              <Typography variant="h4" sx={{ ml: 3 }}>
+                Create a new product
               </Typography>
               <IconButton onClick={onCloseFilter}>
                 <Icon icon={closeFill} width={20} height={20} />
@@ -108,118 +74,79 @@ export default function ShopFilterSidebar({
             <Divider />
 
             <Scrollbar>
-              <Stack spacing={3} sx={{ p: 3 }}>
-                <div>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Gender
-                  </Typography>
-                  <FormGroup>
-                    {FILTER_GENDER_OPTIONS.map((item) => (
-                      <FormControlLabel
-                        key={item}
-                        control={
-                          <Checkbox
-                            {...getFieldProps('gender')}
-                            value={item}
-                            checked={values.gender.includes(item)}
-                          />
-                        }
-                        label={item}
-                      />
-                    ))}
-                  </FormGroup>
-                </div>
+              {/* Code in here .... */}
+              <Box sx={{
+                        m: 3,
+                        borderRadius : 1.5, 
+                        border: '1px solid #ccc'
+                }}
+              >
+              <Stack spacing={3} sx={{m: 3}}>
+                <TextField
+                  fullWidth
+                  autoComplete="name"
+                  type="name"
+                  label="Product Name"
+                  {...getFieldProps('name')}
+                  error={Boolean(touched.name && errors.name)}
+                  helperText={touched.name && errors.name}
+                />
 
-                <div>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Category
-                  </Typography>
-                  <RadioGroup {...getFieldProps('category')}>
-                    {FILTER_CATEGORY_OPTIONS.map((item) => (
-                      <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
-                    ))}
-                  </RadioGroup>
-                </div>
+                <TextField
+                  fullWidth
+                  autoComplete="productSKU"
+                  type="productSKU"
+                  label="Product SKU"
+                  {...getFieldProps('productSKU')}
+                />
 
-                <div>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Colour
-                  </Typography>
-                  <ColorManyPicker
-                    name="colors"
-                    colors={FILTER_COLOR_OPTIONS}
-                    onChange={handleChange}
-                    onChecked={(color) => values.colors.includes(color)}
-                    sx={{ maxWidth: 36 * 4 }}
-                  />
-                </div>
+                <Stack direction="row" justifyContent="space-between">
+                <TextField
+                  sx={{mr:1}}
+                  fullWidth
+                  autoComplete="category"
+                  type="category"
+                  label="Category"
+                  {...getFieldProps('category')}
+                />
 
-                <div>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Price
-                  </Typography>
-                  <RadioGroup {...getFieldProps('priceRange')}>
-                    {FILTER_PRICE_OPTIONS.map((item) => (
-                      <FormControlLabel
-                        key={item.value}
-                        value={item.value}
-                        control={<Radio />}
-                        label={item.label}
-                      />
-                    ))}
-                  </RadioGroup>
-                </div>
+                <TextField
+                  fullWidth
+                  autoComplete="price"
+                  type="price"
+                  label="Sale Price"
+                  {...getFieldProps('price')}
+                />
+                </Stack>
+            </Stack>
 
-                <div>
-                  <Typography variant="subtitle1" gutterBottom>
-                    Rating
-                  </Typography>
-                  <RadioGroup {...getFieldProps('rating')}>
-                    {FILTER_RATING_OPTIONS.map((item, index) => (
-                      <FormControlLabel
-                        key={item}
-                        value={item}
-                        control={
-                          <Radio
-                            disableRipple
-                            color="default"
-                            icon={<Rating readOnly value={4 - index} />}
-                            checkedIcon={<Rating readOnly value={4 - index} />}
-                          />
-                        }
-                        label="& Up"
-                        sx={{
-                          my: 0.5,
-                          borderRadius: 1,
-                          '& > :first-of-type': { py: 0.5 },
-                          '&:hover': {
-                            opacity: 0.48,
-                            '& > *': { bgcolor: 'transparent' }
-                          },
-                          ...(values.rating.includes(item) && {
-                            bgcolor: 'background.neutral'
-                          })
-                        }}
-                      />
-                    ))}
-                  </RadioGroup>
-                </div>
-              </Stack>
+              </Box>
+
             </Scrollbar>
+            <Stack direction="row" justifyContent="space-around">
+            <Box sx={{ p: 3 , width: '210px'}} >
+              <Button
+              fullWidth
+                size="large"
+                type="submit"
+                variant="contained"
+                onClick={onResetFilter}
+              >
+                Cancel
+              </Button>
+            </Box>
 
             <Box sx={{ p: 3 }}>
               <Button
-                fullWidth
                 size="large"
                 type="submit"
-                color="inherit"
-                variant="outlined"
-                onClick={onResetFilter}
-                startIcon={<Icon icon={roundClearAll} />}
+                variant="contained"
+                loading={isSubmitting}
               >
-                Clear All
+                Create Product
               </Button>
             </Box>
+            </Stack>
           </Drawer>
         </Form>
       </FormikProvider>

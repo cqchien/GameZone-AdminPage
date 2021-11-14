@@ -8,8 +8,8 @@ import { mockImgAvatar } from '../utils/mockImages';
 const users = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
   avatarUrl: mockImgAvatar(index + 1),
-  name: faker.name.findName(),
-  company: faker.company.companyName(),
+  product: faker.commerce.productName(),
+  company: faker.commerce.price(),
   isVerified: faker.datatype.boolean(),
   status: sample(['active', 'banned']),
   role: sample([
