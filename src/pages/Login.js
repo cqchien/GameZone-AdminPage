@@ -1,13 +1,14 @@
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
-import { Card, Stack, Link, Container, Typography } from '@mui/material';
+import { Card, Link, Container, Typography } from '@mui/material';
 // layouts
 import AuthLayout from '../layouts/AuthLayout';
 // components
+import Message from '../container/Alert';
 import Page from '../components/Page';
 import { MHidden } from '../components/@material-extend';
-import { LoginForm } from '../components/authentication/login';
+import { HandleLogin } from '../container/HandleLogin';
 import AuthSocial from '../components/authentication/AuthSocial';
 
 // ----------------------------------------------------------------------
@@ -42,6 +43,9 @@ const ContentStyle = styled('div')(({ theme }) => ({
 export default function Login() {
   return (
     <RootStyle title="Login | Minimal-UI">
+      <>
+        <Message />
+      </>
       <AuthLayout>
         Don’t have an account? &nbsp;
         <Link underline="none" variant="subtitle2" component={RouterLink} to="/register">
@@ -60,15 +64,13 @@ export default function Login() {
 
       <Container maxWidth="sm">
         <ContentStyle>
-          <Stack sx={{ mb: 5 }}>
-            <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
-          </Stack>
+          <Typography variant="h4" gutterBottom sx={{ mb: 5 }}>
+            Sign in
+          </Typography>
+
           <AuthSocial />
 
-          <LoginForm />
+          <HandleLogin />
 
           <MHidden width="smUp">
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>

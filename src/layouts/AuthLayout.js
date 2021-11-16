@@ -32,6 +32,8 @@ AuthLayout.propTypes = {
   children: PropTypes.node
 };
 
+// File này dùng để hiện "Get started";
+
 export default function AuthLayout({ children }) {
   return (
     <HeaderStyle>

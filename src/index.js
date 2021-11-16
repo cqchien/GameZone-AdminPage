@@ -1,22 +1,23 @@
 // scroll bar
 import 'simplebar/src/simplebar.css';
-
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
-
-//
+import React from 'react';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
-
+import { store } from './redux/store';
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
   <HelmetProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </HelmetProvider>,
   document.getElementById('root')
 );

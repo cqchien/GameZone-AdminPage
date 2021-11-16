@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 import { Box } from '@mui/material';
 
 // ----------------------------------------------------------------------
-
+// Page login
 const Page = forwardRef(({ children, title = '', ...other }, ref) => (
   <Box ref={ref} {...other}>
     <Helmet>

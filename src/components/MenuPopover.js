@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 // material
 import { Popover } from '@mui/material';
@@ -48,7 +49,6 @@ export default function MenuPopover({ children, sx, ...other }) {
       {...other}
     >
       <ArrowStyle className="arrow" />
-
       {children}
     </Popover>
   );

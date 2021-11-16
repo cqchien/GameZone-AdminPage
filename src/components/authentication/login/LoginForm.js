@@ -5,46 +5,39 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import account from 'src/_mocks_/account';
-
+import PropTypes from 'prop-types';
+import Loader from 'react-loader-spinner';
 // material
-import {
-  Link,
-  Stack,
-  TextField,
-  IconButton,
-  InputAdornment,
-} from '@mui/material';
-
-import { LoadingButton } from '@mui/lab';
+import { Link, Stack, TextField, IconButton, InputAdornment, Button } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
+LoginForm.propTypes = {
+  handleLogin: PropTypes.func,
+  loading: PropTypes.bool
+};
 
-export default function LoginForm() {
+function LoginForm({ handleLogin, loading }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required')
   });
-
-
   const formik = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
     validationSchema: LoginSchema,
+    onSubmit: handleLogin
   });
 
-  const { errors, touched, isSubmitting, getFieldProps, handleSubmit} = formik;
-
+  const { errors, touched, getFieldProps, handleSubmit } = formik;
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
   };
-
 
   return (
     <FormikProvider value={formik}>
@@ -81,22 +74,27 @@ export default function LoginForm() {
         </Stack>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-
           <Link component={RouterLink} variant="subtitle2" to="#">
             Forgot password?
           </Link>
         </Stack>
 
-        <LoadingButton
+        <Button
           fullWidth
           size="large"
           type="submit"
           variant="contained"
-          disabled={isSubmitting}
+          disabled={loading}
+          sx={{ borderRadius: 1 }}
         >
+          {loading && (
+            <Loader type="TailSpin" color="#000000" height={25} width={25} timeout={2000} />
+          )}
           Login
-        </LoadingButton>
+        </Button>
       </Form>
     </FormikProvider>
   );
 }
+
+export { LoginForm };

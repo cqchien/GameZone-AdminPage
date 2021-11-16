@@ -153,6 +153,8 @@ NavSection.propTypes = {
   navConfig: PropTypes.array
 };
 
+// Menu in left of page
+
 export default function NavSection({ navConfig, ...other }) {
   const { pathname } = useLocation();
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);

@@ -20,6 +20,7 @@ const HeaderStyle = styled('header')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
+// Create logo in page login
 export default function LogoOnlyLayout() {
   return (
     <>
